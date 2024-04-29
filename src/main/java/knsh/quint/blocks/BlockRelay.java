@@ -13,28 +13,38 @@ import turniplabs.halplibe.helper.TextureHelper;
 
 import java.util.Random;
 
-public class BlockRedirector extends Block { ;
+public class BlockRelay extends Block { ;
+	private static int frontTexture = TextureHelper.getOrCreateBlockTextureIndex(QuintMod.MOD_ID, "relay_back.png");
+	private static int offTexture = TextureHelper.getOrCreateBlockTextureIndex(QuintMod.MOD_ID, "relay_off.png");
+	private static int onTexture = TextureHelper.getOrCreateBlockTextureIndex(QuintMod.MOD_ID, "relay_on.png");
+
 	boolean isActive;
 
-	public BlockRedirector(String key, int id, boolean isActivated) {
+	public BlockRelay(String key, int id, boolean isActivated) {
 		super(key, id, Material.piston);
 		this.isActive = isActivated;
 		this.setTicking(true);
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(Side side, int data) {
-		if (side.getOpposite().getId() - 2 == data) {
-			return TextureHelper.getOrCreateBlockTextureIndex(QuintMod.MOD_ID, "redirector_back.png");
+	public int getBlockTextureFromSideAndMetadata(Side side, int facing) {
+		if (side == Side.NORTH && facing == DirectionConst.SOUTH) {
+			return frontTexture;
+		} else if (side == Side.SOUTH && facing == DirectionConst.NORTH) {
+			return frontTexture;
+		} else if (side == Side.EAST && facing == DirectionConst.WEST) {
+			return frontTexture;
+		} else if (side == Side.WEST && facing == DirectionConst.EAST) {
+			return frontTexture;
 		}
 		if (!isActive) {
-			return TextureHelper.getOrCreateBlockTextureIndex(QuintMod.MOD_ID, "redirector_off.png");
+			return offTexture;
 		}
-		return TextureHelper.getOrCreateBlockTextureIndex(QuintMod.MOD_ID, "redirector_on.png");
+		return onTexture;
 	}
 
 	public int tickRate() {
-		return 1;
+		return 2;
 	}
 
 	public boolean isIndirectlyPoweringTo(World world, int x, int y, int z, int side) {
@@ -51,7 +61,6 @@ public class BlockRedirector extends Block { ;
 	}
 
 	public boolean isPoweringTo(WorldSource blockAccess, int x, int y, int z, int side) {
-		QuintMod.LOGGER.info(String.valueOf(side));
 		if (!this.isActive) {
 			return false;
 		} else {
@@ -74,10 +83,10 @@ public class BlockRedirector extends Block { ;
 		boolean flag = this.checkForPoweringRedstone(world, x, y, z, l);
 		if (this.isActive) {
 			if (!flag) {
-				world.setBlockAndMetadataWithNotify(x, y, z, QuintBlocks.redirectorInactive.id, world.getBlockMetadata(x, y, z));
+				world.setBlockAndMetadataWithNotify(x, y, z, QuintBlocks.relayInactive.id, world.getBlockMetadata(x, y, z));
 			}
 		} else if (flag) {
-			world.setBlockAndMetadataWithNotify(x, y, z, QuintBlocks.redirectorActive.id, world.getBlockMetadata(x, y, z));
+			world.setBlockAndMetadataWithNotify(x, y, z, QuintBlocks.relayActive.id, world.getBlockMetadata(x, y, z));
 		}
 	}
 

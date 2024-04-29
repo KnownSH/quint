@@ -22,13 +22,11 @@ public class QuintMod implements ModInitializer, GameStartEntrypoint, RecipeEntr
 	}
 
 	@Override
-	public void afterGameStart() {
-
-	}
+	public void afterGameStart() {}
 
 	@Override
 	public void onRecipesReady() {
-
+		QuintRecipes.register();
 	}
 
 	@Override

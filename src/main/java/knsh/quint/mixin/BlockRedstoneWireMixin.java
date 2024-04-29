@@ -20,7 +20,7 @@ public class BlockRedstoneWireMixin {
 	)
 	private static void quint$directsRedstoneWire(WorldSource iblockaccess, int i, int j, int k, int l, CallbackInfoReturnable<Boolean> cir) {
 		int i1 = iblockaccess.getBlockId(i, j, k);
-		if (i1 == QuintBlocks.redirectorInactive.id || i1 == QuintBlocks.redirectorActive.id) {
+		if (i1 == QuintBlocks.relayInactive.id || i1 == QuintBlocks.relayActive.id) {
 			cir.setReturnValue(true);
 		}
 	}
