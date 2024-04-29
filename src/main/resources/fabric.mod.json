@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "quint",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Quint",
+  "description": "Its like Charm/Quark, but for BTA.",
   "authors": [
-    "Turnip Labs"
+    "KnownSH"
   ],
   "contact": {
     "homepage": "",
@@ -19,20 +19,20 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"turniplabs.examplemod.ExampleMod"
+			"knsh.quint.QuintMod"
     ],
 		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"knsh.quint.QuintMod"
 		],
 		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"knsh.quint.QuintMod"
 		],
 		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
+			"knsh.quint.QuintMod"
 		]
 	},
   "mixins": [
-      "examplemod.mixins.json"
+    "quint.mixins.json"
   ],
 
   "depends": {
